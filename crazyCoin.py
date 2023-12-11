@@ -10,8 +10,10 @@ title_art = "░█████╗░██████╗░░█████�
 
 import random as rand
 import time
-
 import os
+
+work_list = []
+crazy_list = []
 
 def clear_screen():
     os.system('clear' if os.name == 'posix' else 'cls')
@@ -19,7 +21,27 @@ def clear_screen():
 def menu_screen():
     clear_screen()
     print("\n" + title_art + "\n")
-    print(" - ")
+    #This can probably be a loop + function
+    while(True):
+        print("Crazy Coin: What work task have you completed?")
+        work_task = input("You: ")
+        work_list.append(work_task)
+        print("Crazy Coin: Good job. Lets give it a flip.")
+
+        #Flip the coin.
+        flip = rand.randint(0,1)
+        if(flip == 0):
+            print("*The coin lands on heads*")
+            print("Crazy Coin: It was heads. Sorry pal. Do another work task and we can flip again.")
+        else:
+            print("*The coin lands on crazy face*")
+            print("Crazy Coin: LETS PARTY! What do you want to do?")
+            crazy_task = input("Enter your crazy task: ")
+            crazy_list.append(crazy_task)
+            print("Crazy Coin: Enjoy your fun. Once you're done, comlete a work task and we can flip again.")
+        
+        print(crazy_list)
+        print(work_list)
 
 # Loads in the instructions with a little animation. (old school computer)
 # Press Enter to continue.
@@ -54,13 +76,12 @@ def instructions_screen():
 def flip_coin():
     flip = rand.randint(0,1)
     if flip==0:
-        return("heads")
+        return(False)
     else:
-        return("crazy")
+        return(True)
 
 def main():
     instructions_screen()
-    time.sleep(0.5)
     while(True):
         user_input = input("Your choice: ").lower() # User selects their guess.
 
